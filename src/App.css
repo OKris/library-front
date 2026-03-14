@@ -1,0 +1,32 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.insert-data {
+    padding: 1rem;
+
+    .field {
+      padding-bottom: 10px;
+      display: flex;
+    }
+
+    label {
+      display: flex;
+      flex-grow: 1;
+    }
+}
+
+tabel {
+  width: 100%;
+  table-layout: fixed;
+}

@@ -1,0 +1,88 @@
+.tables-container {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 40px; 
+
+    .table1 {
+        display: flex;
+        flex-direction: column;
+        
+    }
+
+    th, td {
+        padding: 8px;
+    }
+
+    button {
+        margin: 5px;
+    }
+}
+
+.title {
+    font-weight: bold;
+    margin-bottom: 5px;
+
+    select {
+        margin-left: 10px;
+    }
+}
+
+table, th, td {
+    width: 100%;
+    text-align: center;
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+
+table + table {
+    margin-bottom: 3rem;
+}
+
+.update {
+    margin-right: 2rem;
+    padding: 1rem;
+    width: 30%;
+
+    .field {
+        padding-bottom: 10px;
+        display: flex;
+    }
+
+    label {
+        flex-grow: 1;
+    }
+}
+
+.info {
+    display: flex;
+
+    .table-favorite {
+
+        table, td {
+            width: unset;
+            border: none !important;
+            text-align: left;
+            padding: 0 1.5rem 0 0;
+        }
+        
+    }
+}
+
+.footer {
+    text-align: center;
+    button {
+        margin: 10px 5px;
+    }
+}
+
+.overdue {
+    position: relative;
+}
+.overdue-label {
+    color: red;
+    position: absolute;
+    top: 4px;
+    left: 5px;
+}

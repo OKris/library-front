@@ -1,0 +1,28 @@
+.details {
+    display: block;
+    text-align: center;
+
+    div {
+        padding: 0.5rem;
+    }
+}
+
+.btns {
+    margin-top: 2rem;
+    display: block;
+    text-align: center;
+
+
+    .user-btns {
+        button {
+            margin: 0 1rem 1rem 0;
+        }
+    }
+
+
+    .admin-btns {
+        button {
+            margin: 0 0 0 1rem;
+        }
+    }
+}

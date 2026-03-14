@@ -1,0 +1,13 @@
+.insert-data {
+    width: 25%;
+}
+
+.btn-container {
+    display: flex;
+    flex-grow: 1;
+    justify-content: end;
+}
+
+h3 {
+    padding: 1rem;
+}
