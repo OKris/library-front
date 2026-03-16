@@ -26,6 +26,7 @@ function DetailedView() {
   }, [book_id]);
 
   useEffect(() => {
+    if (!person.id || person.id <= 0) return;
     fetch(import.meta.env.VITE_BACKEND_URL + `/favourites?personId=${person.id}`)
     .then(res => res.json())
     .then(json => setFavourites(json.map((book: Book) => book.id)))
@@ -95,15 +96,20 @@ function DetailedView() {
         <div>{book.year}</div>
       </div>
       <div className="btns" >
-        <div className="user-btns" >
-          <button onClick={() => addRemoveFavourite(Number(book.id))}>
-            {favourites.includes(Number(book.id)) ? "Remove favourite" : "Favourite"}
-          </button>
-        
-          {book.activeBorrows.length === 0 &&
-            <button onClick={() => checkout(Number(book.id))} >Checkout</button>
-          }
-        </div>
+        {isLoggedIn &&
+          <>
+          <div className="user-btns" >
+            <button onClick={() => addRemoveFavourite(Number(book.id))}>
+              {favourites.includes(Number(book.id)) ? "Remove favourite" : "Favourite"}
+            </button>
+          
+
+            {book.activeBorrows.length === 0 &&
+              <button onClick={() => checkout(Number(book.id))} >Checkout</button>
+            }
+          </div>
+          </>
+        }
         {isLoggedIn && person.role == "ADMIN" &&
         <>
         <div className="admin-btns">
