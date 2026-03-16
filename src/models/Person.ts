@@ -1,3 +1,5 @@
+import type { Book } from "./Book"
+
 export type Person = {
     id?: number,
     firstName: string,
@@ -5,5 +7,5 @@ export type Person = {
     email: string,
     password?: string,
     role: "USER" | "ADMIN",
-    favourites: Array<string>
+    favourites: Book[]
 }

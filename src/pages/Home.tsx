@@ -65,6 +65,7 @@ function Home() {
     }
 
     const sendToBorrow = async() => {
+        if (!person.id || !sessionStorage.getItem("token")) return;
         if (borrowList.length <= 0) {
             alert("Add books to borrow!");
             return;
@@ -149,7 +150,7 @@ function Home() {
         </div>
         <div className="checkout">
             <div className="ct"></div>
-            <button onClick={() => {sendToBorrow()}} >Checkout books</button>
+            <button disabled={!isLoggedIn } onClick={() => {sendToBorrow()}} >Checkout books</button>
         </div>
         <div className="page-block">
             <button disabled={page === 0} onClick={() => setPage(page -1)}>Last</button>

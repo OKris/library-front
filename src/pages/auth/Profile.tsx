@@ -21,7 +21,6 @@ function Profile() {
     const [borrowed, setBorrowed] = useState<Borrow[]>([]);
     const [page, setPage] = useState(0);
     const [size, setSize] = useState(5);
-    const [sort, setSort] = useState("id,asc");
     const [totalPages, setTotalPages] = useState(0);
     const [today] = useState(new Date());
 
@@ -42,10 +41,10 @@ function Profile() {
     useEffect(() => {
         if (person.id == 0) return;
         loadHistory();
-    }, [person.id, page, size, sort]);
+    }, [person.id, page, size]);
 
     const loadHistory = async() => {
-        const res = await fetch(import.meta.env.VITE_BACKEND_URL + `/books/borrowed/${person.id}?&page=${page}&size=${size}&sort=${sort}`, {
+        const res = await fetch(import.meta.env.VITE_BACKEND_URL + `/books/borrowed/${person.id}?&page=${page}&size=${size}`, {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + sessionStorage.getItem("token")
@@ -105,10 +104,6 @@ function Profile() {
         setPage(0);
     }
 
-    const handleSort = (newSort: string) => {
-        setSort(newSort);
-        setPage(0);
-    }
 
     const list = [1,2,3,4,5,6,7,8,9,10];
 

@@ -4,26 +4,38 @@ import type {Person} from "../models/Person";
 import type { Role } from "../models/Role";
 import type { Book } from "../models/Book";
 
-export const AuthContext = createContext({
+
+type AuthContextType = {
+    loading: boolean
+    person: Person
+    isLoggedIn: boolean
+    favourites: Book[]
+    login: (token: string) => void
+    logout: () => void
+    setPerson: (person: Person) => void
+}
+
+export const AuthContext = createContext<AuthContextType>({
     loading: false,
     person: {
         id: 0,
         firstName: "",
         lastName: "",
         email: "",
-        role: "CUSTOMER" as Role,
+        role: "USER" as Role,
         favourites: []
     },
     isLoggedIn: false,
-    login: (_token: string) => {},
+    favourites: [],
+    login: () => {},
     logout: () => {},
-    setPerson: (_person: Person) => {}
+    setPerson: () => {}
 });
 
 export const AuthContextProvider = ({children}: {children: ReactNode}) => {
     const [loading, setLoading] = useState(true);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [favourites, setFavourites] = useState([]);
+    const [favourites, setFavourites] = useState<Book[]>([]);
     const [person, setPerson] = useState<Person>({
         id: 0,
         firstName: "",
@@ -62,14 +74,13 @@ export const AuthContextProvider = ({children}: {children: ReactNode}) => {
     }, []);
 
     useEffect(() => {
-        if (person.id !== 0) {
+        if (!person.id) {
             getFavourites();
         }
     }, [person]);
 
     const getFavourites = () => {
-        console.log(person.id);
-        if (person.id == 0) return;
+        if (!person.id) return;
         fetch(import.meta.env.VITE_BACKEND_URL + `/favourites?personId=${person.id}`)
         .then(res => res.json())
         .then(json => { 
