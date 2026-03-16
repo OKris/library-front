@@ -17,7 +17,6 @@ function AddBook() {
 
 
   const addBook = async () => {
-    console.log(book);
     fetch(import.meta.env.VITE_BACKEND_URL + "/save-book", {
       method: "POST",
       body: JSON.stringify(book),

@@ -44,7 +44,6 @@ function DetailedView() {
   }
 
   const addToPerson = async (updated: number[]) => {
-    console.log("send favou ", updated);
     await fetch(import.meta.env.VITE_BACKEND_URL + `/favourites?personId=${person.id}`, {
       method: "POST",
       body: JSON.stringify(updated),
