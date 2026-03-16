@@ -34,7 +34,6 @@ function Profile() {
         .then(res => res.json())
         .then(json => {
             setFavourites(json);
-            console.log(json);
         })
     }, [person.id]);
 

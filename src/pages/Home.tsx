@@ -5,6 +5,7 @@ import './Home.css'
 import { AuthContext } from '../context/AuthContext';
 
 function Home() {
+    const [loading, setLoading] = useState(true);
     const {isLoggedIn, person} = useContext(AuthContext);
     const [books, setBooks] = useState<Book[]>([]);
     const [page, setPage] = useState(0);
@@ -24,6 +25,7 @@ function Home() {
         .then(json => {
             setBooks(json.content);
             setTotalPages(json.totalPages);
+            setLoading(false);
         })
     }, [page, size, sort, selectedGenre, searchQuery, reloadBooks]);
 
@@ -84,6 +86,11 @@ function Home() {
             setReloadBooks(prev => !prev);
         }
     }
+
+    if (loading) {
+      return <div></div>
+    }
+
 
   return (
     <div>
