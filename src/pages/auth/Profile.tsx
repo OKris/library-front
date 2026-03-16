@@ -31,7 +31,7 @@ function Profile() {
 
     useEffect(() => {
         if (person.id == 0) return;
-        fetch(`http://localhost:8080/favourites?personId=${person.id}`)
+        fetch(import.meta.env.VITE_BACKEND_URL + `/favourites?personId=${person.id}`)
         .then(res => res.json())
         .then(json => {
             setFavourites(json);
@@ -45,7 +45,7 @@ function Profile() {
     }, [person.id, page, size, sort]);
 
     const loadHistory = async() => {
-        const res = await fetch(`http://localhost:8080/books/borrowed/${person.id}?&page=${page}&size=${size}&sort=${sort}`, {
+        const res = await fetch(import.meta.env.VITE_BACKEND_URL + `/books/borrowed/${person.id}?&page=${page}&size=${size}&sort=${sort}`, {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + sessionStorage.getItem("token")
@@ -66,7 +66,7 @@ function Profile() {
 
 
     const updateProfile = async() => {
-        const res = await fetch("http://localhost:8080/update-profile", {
+        const res = await fetch(import.meta.env.VITE_BACKEND_URL + "/update-profile", {
             method: "PUT",
             body: JSON.stringify(person),
             headers: {
@@ -87,7 +87,7 @@ function Profile() {
     }
 
     const returnBook = async(book_id: number) => {
-        const res = await fetch(`http://localhost:8080/books/return?bookId=${book_id}&personId=${person.id}`, {
+        const res = await fetch(import.meta.env.VITE_BACKEND_URL + `/books/return?bookId=${book_id}&personId=${person.id}`, {
             method: "POST",
             body: JSON.stringify(person),
             headers: {

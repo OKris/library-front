@@ -19,7 +19,7 @@ function Home() {
     const [reloadBooks, setReloadBooks] = useState(false);
 
     useEffect(() => {
-        fetch(`http://localhost:8080/books?genre=${selectedGenre}&search=${searchQuery}&page=${page}&size=${size}&sort=${sort}`)
+        fetch(import.meta.env.VITE_BACKEND_URL + `/books?genre=${selectedGenre}&search=${searchQuery}&page=${page}&size=${size}&sort=${sort}`)
         .then(res => res.json())
         .then(json => {
             setBooks(json.content);
@@ -35,7 +35,7 @@ function Home() {
     }, [query]);
 
     useEffect(() => {
-        fetch(`http://localhost:8080/genres`)
+        fetch(import.meta.env.VITE_BACKEND_URL + `/genres`)
         .then(res => res.json())
         .then(json => {
             setGenres(json);
@@ -69,7 +69,7 @@ function Home() {
             alert("Add books to borrow!");
             return;
         }
-        const res = await fetch(`http://localhost:8080/books/borrow-multiple?personId=${person.id}`, {
+        const res = await fetch(import.meta.env.VITE_BACKEND_URL + `/books/borrow-multiple?personId=${person.id}`, {
             method: "POST",
             body: JSON.stringify(borrowList),
             headers: {

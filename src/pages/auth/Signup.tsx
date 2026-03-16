@@ -14,7 +14,7 @@ function Signup() {
   });
 
   const signup = async() => {
-        const res = await fetch("http://localhost:8080/signup", {
+        const res = await fetch(import.meta.env.VITE_BACKEND_URL + "/signup", {
             method: "POST",
             body: JSON.stringify(person),
             headers: {

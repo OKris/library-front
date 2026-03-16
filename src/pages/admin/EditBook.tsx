@@ -14,13 +14,13 @@ function EditBook() {
   });
 
   useEffect(() => {
-      fetch("http://localhost:8080/book/" + book_id)
+      fetch(import.meta.env.VITE_BACKEND_URL + "/book/" + book_id)
       .then(res => res.json())
       .then(json => setBook(json))
     }, [book_id]);
 
   const editBook = async () => {
-    const res = await fetch("http://localhost:8080/book", {
+    const res = await fetch(import.meta.env.VITE_BACKEND_URL + "/book", {
       method: "PUT",
       body: JSON.stringify(book),
       headers: {

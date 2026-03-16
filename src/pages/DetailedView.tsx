@@ -20,13 +20,13 @@ function DetailedView() {
   });
 
   useEffect(() => {
-    fetch(`http://localhost:8080/book/${book_id}`)
+    fetch(import.meta.env.VITE_BACKEND_URL + `/book/${book_id}`)
     .then(res => res.json())
     .then(json => setBook(json))
   }, [book_id]);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/favourites?personId=${person.id}`)
+    fetch(import.meta.env.VITE_BACKEND_URL + `/favourites?personId=${person.id}`)
     .then(res => res.json())
     .then(json => setFavourites(json.map((book: Book) => book.id)))
   }, [person.id]);
@@ -45,7 +45,7 @@ function DetailedView() {
 
   const addToPerson = async (updated: number[]) => {
     console.log("send favou ", updated);
-    await fetch(`http://localhost:8080/favourites?personId=${person.id}`, {
+    await fetch(import.meta.env.VITE_BACKEND_URL + `/favourites?personId=${person.id}`, {
       method: "POST",
       body: JSON.stringify(updated),
       headers: {
@@ -56,7 +56,7 @@ function DetailedView() {
   }
 
   const checkout = async(book_id: number) => {
-    await fetch(`http://localhost:8080/books/borrow?id=${book_id}&personId=${person.id}`, {
+    await fetch(import.meta.env.VITE_BACKEND_URL + `/books/borrow?id=${book_id}&personId=${person.id}`, {
         method: "POST",
         body: JSON.stringify(person),
         headers: {
@@ -72,7 +72,7 @@ function DetailedView() {
   }
 
   function deleteBook(bookId: number) {
-    fetch(`http://localhost:8080/delete?id=${bookId}`, {
+    fetch(import.meta.env.VITE_BACKEND_URL + `/delete?id=${bookId}`, {
       method: "DELETE",
       headers: {
         "Authorization": "Bearer " + sessionStorage.getItem("token")

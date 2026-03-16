@@ -2,6 +2,7 @@ import { createContext, useEffect, useState, type ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import type {Person} from "../models/Person";
 import type { Role } from "../models/Role";
+import type { Book } from "../models/Book";
 
 export const AuthContext = createContext({
     loading: false,
@@ -38,7 +39,7 @@ export const AuthContextProvider = ({children}: {children: ReactNode}) => {
             setLoading(false);
             return;
         }
-        const res = await fetch("http://localhost:8080/profile", {
+        const res = await fetch(import.meta.env.VITE_BACKEND_URL + "/profile", {
             headers: {
                 "Authorization": "Bearer " + sessionStorage.getItem("token")
             }
@@ -69,11 +70,11 @@ export const AuthContextProvider = ({children}: {children: ReactNode}) => {
     const getFavourites = () => {
         console.log(person.id);
         if (person.id == 0) return;
-        fetch(`http://localhost:8080/favourites?personId=${person.id}`)
+        fetch(import.meta.env.VITE_BACKEND_URL + `/favourites?personId=${person.id}`)
         .then(res => res.json())
         .then(json => { 
             setFavourites(json);
-            const ids = json.map(book => book.id);
+            const ids = json.map((book: Book) => book.id);
             localStorage.setItem("favourites", JSON.stringify(ids));
         })
     }

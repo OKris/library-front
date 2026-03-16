@@ -6,7 +6,7 @@ function Login() {
     const [loginCredentials, setLoginCredentials] = useState({"email": "", "password": ""});
     
     const handleLogin = async () => {
-        const res = await fetch("http://localhost:8080/login",{
+        const res = await fetch(import.meta.env.VITE_BACKEND_URL + "/login",{
             method: "POST",
             body: JSON.stringify(loginCredentials),
             headers: {
